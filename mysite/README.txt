@@ -1,0 +1,1 @@
+Ubuntu pip3 install django-users2

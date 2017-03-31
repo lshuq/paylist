@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}
+{{ page.name }}
+{% endblock title %}
+{% block css %}
+<link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/test.css"/>
+{% endblock css %}
+{% block content %}
+<body class="cat">
+<div class="top">
+    <div class="left">
+        <ul>
+            <a href="/">
+                <li>
+                    首页
+                </li>
+            </a>
+            <a href="/list">
+                <li>
+                    我的账单
+                </li>
+            </a>
+            <a href="/person">
+                <li>
+                    我的账本
+                </li>
+            </a>
+        </ul>
+    </div>
+    <div class="right">
+        <ul>
+            <li>
+                {{ user.email }}
+            </li>
+            <a href="/accounts/logout">
+                <li>
+                    注销
+                </li>
+            </a>
+        </ul>
+    </div>
+</div>
+<br/>
+<hr width="95%">
+<div class="main">
+    <label><h1>账本：{{ page.name }}</h1></label>
+    <div>
+        <label>余额：{{ page.sum }}</label><br/>
+        <label>花费：{{ page.cost }}</label><br/>
+        <label>欠账：{{ page.borrowed }}</label><br/>
+    </div>
+    <div>
+        <form action="{{ person.page.get_absolute_url }}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="tmp" value="{{ page.name }}">
+            <label>账本：</label><input type="text" name="name" value="{{ page.name }}" required="required">
+            <label>余额：</label><input type="number" name="sum" value="{{ page.sum }}" required="required">
+            <label>花费：</label><input type="number" name="cost" value="{{ page.cost }}" required="required">
+            <label>借出：</label><input type="number" name="lent" value="{{ page.lent }}" required="required">
+            <label>欠账：</label><input type="number" name="borrow" value="{{ page.borrowed }}" required="required">
+            <input type="submit" value="Submit">
+        </form>
+        <iframe id="id_iframe" name="id_iframe" style="display:none;"></iframe>
+        <a href="/person">返回用户</a>
+    </div>
+</div>
+</body>
+{% endblock content %}

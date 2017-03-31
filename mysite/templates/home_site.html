@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block css %}
+    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/css/test.css"/>
+{% endblock css %}
+{% block content %}
+    <body class="cat">
+    <div class="top">
+        {% if user.email %}
+            <div class="left">
+                <ul>
+                    <a href="/">
+                        <li>
+                            首页
+                        </li>
+                    </a>
+                    <a href="/list">
+                        <li>
+                            我的账单
+                        </li>
+                    </a>
+                    <a href="/person">
+                        <li>
+                            我的账本
+                        </li>
+                    </a>
+                </ul>
+            </div>
+            <div class="right">
+                <ul>
+                    <li>
+                        {{ user.email }}
+                    </li>
+                    <a href="/accounts/logout">
+                        <li>
+                            注销
+                        </li>
+                    </a>
+                </ul>
+            </div>
+        {% else %}
+            <div class="right">
+                <ul>
+                    <li>
+                        <a href="/accounts/login">登录</a>
+                    </li>
+                    <li>
+                        <a href="/accounts/register">注册</a>
+                    </li>
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+    <br/>
+    <hr width="95%">
+    <div class="main">
+        <link rel="stylesheet" type="text/css" href="/static/css/flashfont.css"/>
+        <div id="container">
+            <br/><br/><br/><br/><br/>
+            <p><a>This<br/>is<br/>the<br/>homepage<br/></a></p>
+        </div>
+    </div>
+    </body>
+{% endblock content %}

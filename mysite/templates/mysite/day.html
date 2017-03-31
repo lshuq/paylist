@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}
+{% endblock title %}
+{% block css %}
+    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../static/css/test.css"/>
+{% endblock css %}
+{% block content %}
+    <body class="cat">
+    <div class="top">
+        <div class="left">
+            <ul>
+                <a href="/">
+                    <li>
+                        首页
+                    </li>
+                </a>
+                <a href="/list">
+                    <li>
+                        我的账单
+                    </li>
+                </a>
+                <a href="/person">
+                    <li>
+                        我的账本
+                    </li>
+                </a>
+            </ul>
+        </div>
+        <div class="right">
+            <ul>
+                <li>
+                    {{ user.email }}
+                </li>
+                <a href="/accounts/logout">
+                    <li>
+                        注销
+                    </li>
+                </a>
+            </ul>
+        </div>
+    </div>
+    <br/>
+    <hr width="95%">
+    <div class="main">
+        <h1>最近一天的账单：</h1>
+        <ul>
+            {% for money in  moneylist %}
+                <li>
+                    <a href="{{ money.get_absolute_url }}">{{ money }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    </body>
+{% endblock content %}

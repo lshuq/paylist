@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}
+{{ moneylist.detail }}
+{% endblock title %}
+{% block css %}
+<link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/test.css"/>
+{% endblock css %}
+{% block content %}
+<body class="cat">
+<div class="top">
+    <div class="left">
+        <ul>
+            <a href="/">
+                <li>
+                    首页
+                </li>
+            </a>
+            <a href="/list">
+                <li>
+                    我的账单
+                </li>
+            </a>
+            <a href="/person">
+                <li>
+                    我的账本
+                </li>
+            </a>
+        </ul>
+    </div>
+    <div class="right">
+        <ul>
+            <li>
+                {{ user.email }}
+            </li>
+            <a href="/accounts/logout">
+                <li>
+                    注销
+                </li>
+            </a>
+        </ul>
+    </div>
+</div>
+<br/>
+<hr width="95%">
+<div class="main">
+    <br/>
+    <label>内容：</label><label>{{ moneylist.detail }}</label><br/>
+    <label>收入：</label><label>{{ moneylist.num_in }}</label><br/>
+    <label>支出：</label><label>{{ moneylist.num_out }}</label><br/>
+    <label>记账人：</label><label>{{ moneylist.person_in }}</label><br/>
+    <label>清账人：</label><label>{{ moneylist.person_out }}</label><br/>
+    <label>记录时间：</label><label>{{ moneylist.time }}</label><br/>
+    <form action="{{ moneylist.get_absolute_url }}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="id" value="{{ moneylist.id }}">
+        <input type="hidden" name="num_in" value="{{ moneylist.num_in }}">
+        <input type="hidden" name="num_out" value="{{ moneylist.num_out }}">
+        <label>清账人：</label>
+        <input type="text" name="checker" value="{{ user.email }}" required="required"/>
+        <input type="submit" value="清账">
+    </form>
+    <iframe id="id_iframe" name="id_iframe" style="display:none;"></iframe>
+</div>
+</body>
+{% endblock %}

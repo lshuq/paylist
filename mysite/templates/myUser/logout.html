@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block css %}
+    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/static/css/test.css" rel="stylesheet"/>
+{% endblock css %}
+{% block content %}
+    <body class="cat">
+    <p>{% trans "Logged out" %}</p>
+    <!--新加：-->
+    <a href="/">自动跳转回到首页，未成功请点击此链接返回</a>
+    <script language='javascript' content="3">document.location = '/'</script>
+    </body>
+{% endblock %}

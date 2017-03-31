@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %}
+{% endblock title %}
+{% block css %}
+    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../static/css/test.css"/>
+{% endblock css %}
+{% block content %}
+    <body class="cat">
+    <div class="top">
+        <div class="left">
+            <ul>
+                <a href="/">
+                    <li>
+                        首页
+                    </li>
+                </a>
+                <a href="/list">
+                    <li>
+                        我的账单
+                    </li>
+                </a>
+                <a href="/person">
+                    <li>
+                        我的账本
+                    </li>
+                </a>
+            </ul>
+        </div>
+        <div class="right">
+            <ul>
+                <li>
+                    {{ user.email }}
+                </li>
+                <a href="/accounts/logout">
+                    <li>
+                        注销
+                    </li>
+                </a>
+            </ul>
+        </div>
+    </div>
+    <br/>
+    <hr width="95%">
+    <div class="main">
+        <ul>
+            {% for money in  moneylist %}
+                <li>
+                    <a href="{{ money.get_absolute_url }}">{{ money }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <br/>
+        <br/><br/><br/>
+        <form method="post">
+            {% csrf_token %}
+            <label>从：</label>
+            <input type="number" name="year_from" required="required" value="2017">年
+            <input type="number" name="month_from" required="required">月
+            <input type="number" name="day_from" required="required">日
+            <br/>
+            <label>到：</label>
+            <input type="number" name="year_to" required="required" value="2017">年
+            <input type="number" name="month_to" required="required">月
+            <input type="number" name="day_to" required="required">日
+            <br/>
+            <input type="submit" value="查询">
+        </form>
+    </div>
+    </body>
+{% endblock content %}

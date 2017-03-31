@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block css %}
+    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    {#    <link href="../static/css/cover.css" rel="stylesheet"/>#}
+    <link href="/static/css/test.css" rel="stylesheet"/>
+{% endblock css %}
+{% block content %}
+    <body class="cat">
+    <div class="juzhong">
+        <form method="post" action=".">
+            {% if form.errors %}
+                {% include "users/partials/errors.html" %}
+            {% endif %}
+            {% csrf_token %}
+            {% for field in form %}
+                {% include "users/partials/field.html" %}
+            {% endfor %}
+            <div class="button-wrapper submit">
+                <input type="submit" value="{% trans 'Log in' %}"/>
+            </div>
+            <!--<input type="hidden" name="next" value="{{ next }}" />-->
+            <!--修改-->
+            <input type="hidden" name="next" value="/"/>
+            <p><a href="{% url 'users_password_reset' %}">{% trans "Forgot password" %}</a></p>
+            <p><a href="{% url 'users_register' %}">{% trans "Register" %}</a></p>
+        </form>
+    </div>
+    </body>
+{% endblock %}

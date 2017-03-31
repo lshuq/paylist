@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block css %}
+    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/static/css/test.css" rel="stylesheet"/>
+{% endblock css %}
+{% block content %}
+    <body class="cat">
+    <div class="juzhong">
+        <h2>Welcome!</h2>
+        <div class="form-wrapper">
+            <form method="post" action=".">
+                {% if form.errors %}
+                    {% include "users/partials/errors.html" %}
+                {% endif %}
+                {% csrf_token %}
+                {% for field in form %}
+                    {% include "users/partials/field.html" %}
+                {% endfor %}
+                <div class="button-wrapper submit">
+                    <input type="submit" value="{% trans 'Register' %}"/>
+                </div>
+            </form>
+        </div>
+    </div>
+    </body>
+{% endblock %}

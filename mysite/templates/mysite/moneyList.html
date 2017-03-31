@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}
+    {{ moneyList.detail }}
+{% endblock title %}
+{% block css %}
+    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/test.css"/>
+{% endblock css %}
+
+{% block content %}
+    <body class="cat">
+    <div class="top">
+        <div class="left">
+            <ul>
+                <a href="/">
+                    <li>
+                        首页
+                    </li>
+                </a>
+                <a href="/list">
+                    <li>
+                        我的账单
+                    </li>
+                </a>
+                <a href="/person">
+                    <li>
+                        我的账本
+                    </li>
+                </a>
+            </ul>
+        </div>
+        <div class="right">
+            <ul>
+                <li>
+                    {{ user.email }}
+                </li>
+                <a href="/accounts/logout">
+                    <li>
+                        注销
+                    </li>
+                </a>
+            </ul>
+        </div>
+    </div>
+    <br/>
+    <hr width="95%">
+    <div class="main">
+        <h2>全部账单：</h2><br/>
+        <ul>
+            {% for money in  moneyList %}
+                <li>
+                    <a href="{{ money.get_absolute_url }}">{{ money }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <br/>
+        <br/>
+        <a href="/list/search/">账单查询</a>
+        <br/>
+        <br/>
+        <br/>
+        <h3>增加新账单：</h3>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            {#            <label>记录时间：</label><input type="datetime-local" name="time"  required="required">#}
+            <input type="submit" value="增加账单">
+        </form>
+    </div>
+    </body>
+{% endblock content %}
